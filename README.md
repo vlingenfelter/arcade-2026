@@ -178,7 +178,7 @@ return {
 
 ### Table Cells
 
-The chart can be returned from an Arcade expression and displayed directly inside dashboard table cells using the following code.
+The same functions also work inside Dashboard Table elements, by going to the "Values" option and enabling "Advanced Formatting", and working in Arcade there. To get the horizontal bar charts to render in the table, you will need to add an extra value field that will be replaced with the bar chart. For this example, the extra value field I used is "Oranges".
 
 ![Bar chart element in a table](dashboard/dashboard_table_example.png)
 
@@ -192,13 +192,29 @@ var labelArray = ["Apples", "Oranges", "Bananas", "Kiwis"];
 var chart = makeBarChart(colorArray, featureArray, labelArray, True)
 
 return {
-  textColor: '',
-  backgroundColor: '',
-  separatorColor:'',
-  selectionColor: '',
-  selectionTextColor: '',
-  attributes: {
-    chart: chart,
+  cells: {
+    oranges: {
+      displayText : chart,
+      textColor: '',
+      backgroundColor: '',
+      textAlign: 'right',
+      iconName: '',
+      iconAlign: '',
+      iconColor: '',
+      iconOutlineColor: ''
+    },
+		
+    site_name: {
+      displayText : $datapoint.site_name,
+      textColor: '',
+      backgroundColor: '',
+      textAlign: 'left',
+      iconName: '',
+      iconAlign: '',
+      iconColor: '',
+      iconOutlineColor: ''
+    },
+		
   }
 }
 ```
@@ -206,7 +222,7 @@ return {
 
 ### Lists
 
-The same function also works inside Dashboard List elements, by going to the "List" option and enabling "Advanced Formatting".
+The same functions also work inside Dashboard List elements, by going to the "List" option and enabling "Advanced Formatting".
 
 ![Bar chart element in a list](dashboard/dashboard_list_example.png)
 
