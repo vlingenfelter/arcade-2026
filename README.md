@@ -144,13 +144,17 @@ The function automatically:
 
 # Examples
 
+All examples were created using a [demo feature layer](https://sfgov.maps.arcgis.com/home/item.html?id=a274afabf00046fda7756afc482fe1d0#overview). If you would like to recreate these examples, the feature layer is public. 
+
 ## Web Map Popup
 
-The following Arcade expression creates a stacked bar chart showing the distribution of fruit counts.
+The following Arcade expression creates a stacked bar chart showing the distribution of fruit counts. 
 
 ![Bar chart popup in a web map](popup/popup_with_bar.png)
 
 ```javascript
+\\ copy this after importing the helper functions
+
 var featureArray = [$feature.Apples, $feature.Bananas, $feature.Kiwis, $feature.Oranges ];
 var colorArray = ["maroon", "yellow", "green", "orange"];
 var labelArray = ["Apples", "Bananas", "Kiwis", "Oranges" ];
@@ -174,21 +178,65 @@ return {
 
 ### Table Cells
 
-The chart can be returned from an Arcade expression and displayed directly inside dashboard table cells.
+The chart can be returned from an Arcade expression and displayed directly inside dashboard table cells using the following code.
 
 ![Bar chart element in a table](dashboard/dashboard_table_example.png)
 
+```javascript
+\\ copy this after importing the helper functions
+
+var featureArray = [$datapoint.apples, $datapoint.oranges, $datapoint.Bananas, $datapoint.kiwis];
+var colorArray = ["maroon", "DarkOrange", "gold", "MediumSeaGreen"];
+var labelArray = ["Apples", "Oranges", "Bananas", "Kiwis"];
+
+var chart = makeBarChart(colorArray, featureArray, labelArray, True)
+
+return {
+  textColor: '',
+  backgroundColor: '',
+  separatorColor:'',
+  selectionColor: '',
+  selectionTextColor: '',
+  attributes: {
+    chart: chart,
+  }
+}
+```
 ---
 
 ### Lists
 
-The same function also works inside Dashboard List elements.
+The same function also works inside Dashboard List elements, by going to the "List" option and enabling "Advanced Formatting".
 
 ![Bar chart element in a list](dashboard/dashboard_list_example.png)
 
+```javascript
+\\ copy this after importing the helper functions
+
+var featureArray = [$datapoint.apples, $datapoint.oranges, $datapoint.Bananas, $datapoint.kiwis];
+var colorArray = ["maroon", "DarkOrange", "gold", "MediumSeaGreen"];
+var labelArray = ["Apples", "Oranges", "Bananas", "Kiwis"];
+
+var chart = makeBarChart(colorArray, featureArray, labelArray, True)
+
+return {
+  textColor: '',
+  backgroundColor: '',
+  separatorColor:'',
+  selectionColor: '',
+  selectionTextColor: '',
+  attributes: {
+    chart: chart,
+  }
+}
+```
+To make the chart visible in the list, add {expression/chart} to your list Template. 
+
+![Bar chart in list configuration](dashboard/dashboard_list_config.png)
+
 ---
 
-## Notes
+# Notes
 
 * Values should either be counts or decimal percentages that sum to **1.0**.
 * Segments smaller than **1%** are hidden to improve readability.
