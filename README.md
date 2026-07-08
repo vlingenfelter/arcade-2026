@@ -18,7 +18,11 @@ This repository provides a reusable `makeBarChart()` function that:
 
 ## How It Works
 
-The chart is built from a few small helper functions.
+The chart is built from a few small helper functions:
+* [`makePatch`](https://github.com/vlingenfelter/arcade-2026/tree/main#makepatchcolor)
+* [`makeBarChunk`](https://github.com/vlingenfelter/arcade-2026/tree/main#makebarchunkcolor-width)
+* [`convertArrayToDecimal`](https://github.com/vlingenfelter/arcade-2026/tree/main#convertarraytodecimalarray)
+* [`makeBarChart`](https://github.com/vlingenfelter/arcade-2026/tree/main#makebarchartcolors-values-labels-convert)
 
 ### `makePatch(color)`
 
@@ -67,19 +71,7 @@ function makeBarChunk(color, width) {
 
 ### `convertArrayToDecimal(array)`
 
-Converts an array of counts into decimal proportions that sum to 1.
-
-For example:
-
-```text
-[50, 30, 20]
-```
-
-becomes
-
-```text
-[0.5, 0.3, 0.2]
-```
+Converts an array of counts into decimal proportions that sum to 1. For example, `[50, 30, 20]` becomes `[0.5, 0.3, 0.2]`
 
 Use this when your input values are counts instead of percentages.
 
@@ -102,8 +94,6 @@ function convertArrayToDecimal(array) {
 
 Generates the complete bar chart and legend.
 
-If `convert` is `True`, the values are first converted into percentages using `convertArrayToDecimal()`.
-
 ### Parameters
 
 | Parameter | Type    | Description                     |
@@ -111,34 +101,59 @@ If `convert` is `True`, the values are first converted into percentages using `c
 | `colors`  | Array   | Color for each category         |
 | `values`  | Array   | Counts or decimal percentages   |
 | `labels`  | Array   | Label for each category         |
-| `convert` | Boolean | Convert counts into percentages |
+| `convert` | Boolean | If true, convert counts into percentages |
 
 ### Returns
 
 A string containing HTML that can be returned from an Arcade expression.
 
 Example input:
-
 ```javascript
 colors = ["maroon", "peru", "grey", "seagreen"]
-
 values = [60, 35, 0, 5]
-
 labels = ["Down", "Partial", "Unknown", "Up"]
 ```
-
 or, if already normalized:
-
 ```javascript
 values = [0.60, 0.35, 0.00, 0.05]
 ```
 
 The function automatically:
-
 * Converts counts to percentages (optional)
 * Skips segments smaller than 1%
 * Creates the stacked bar
 * Builds a matching legend
+
+```
+function makeBarChart(colors, values, labels, convert) {
+	// convert the values to decimals if necessary 
+	if (convert) {
+			values = convertArrayToDecimal(values)
+	    Console(values)
+	}
+	
+  var barHtml = ''
+  var labelHtml = ''
+
+  barHtml += '<table style="width:100%"><tbody><tr><td><table style="width:100%"><tbody><tr>';
+  labelHtml = '<div style="text-align: center"><p style="display: inline-block; text-align: left;">';
+  
+  // loop through each item in the color array
+  // if the value is too small to be meaningful, skip that chunk and that label
+  for(var i in colors) {
+    if (values[i] > 0.01) {
+      var percent = Round(values[i], 2) * 100 + '%'
+      barHtml += makeBarChunk(colors[i], percent);
+      labelHtml +=  makePatch(colors[i]) + percent + " " + labels[i] + " ";
+    }
+  }
+
+  barHtml += '<td style="font-size:0px" width="0%">&nbsp;</td></tr></tbody></table></td></tr></tbody></table>'
+  labelHtml += "</p></div>"
+
+  return barHtml + labelHtml
+}
+```
 
 ---
 
