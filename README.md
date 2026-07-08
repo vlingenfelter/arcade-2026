@@ -156,6 +156,30 @@ function makeBarChart(colors, values, labels, convert) {
   return barHtml + labelHtml
 }
 ```
+Example HTML output:
+```html
+<table style="width:100%">
+  <tbody>
+    <tr>
+      <td>
+        <table style="width:100%">
+          <tbody>
+            <tr>
+              <td style="background-color:DarkOrange; width:67%">&nbsp;</td>
+              <td style="background-color:gold; width:20%">&nbsp;</td>
+              <td style="background-color:MediumSeaGreen; width:13%">&nbsp;</td>
+              <td style="font-size:0px" width="0%">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center">
+  <p style="display: inline-block; text-align: left;"><span style="font-size:medium; color:DarkOrange;"> &#9632; </span>67% Oranges <span style="font-size:medium; color:gold;"> &#9632; </span>20% Bananas <span style="font-size:medium; color:MediumSeaGreen;"> &#9632; </span>13% Kiwis </p>
+</div>
+```
 
 ---
 
