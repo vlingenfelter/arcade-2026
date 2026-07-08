@@ -126,7 +126,7 @@ The function automatically:
 * Creates the stacked bar
 * Builds a matching legend
 
-```
+```javascript
 function makeBarChart(colors, values, labels, convert) {
 	// convert the values to decimals if necessary 
 	if (convert) {
