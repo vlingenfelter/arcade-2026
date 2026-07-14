@@ -1,49 +1,31 @@
 # Project: Build a Horizontal Bar Chart with Arcade
 
-## What You'll Build
+Say you have a point feature layer that represents fruit stands in San Francisco. Each point represents the location of a fruit stand, and the attribute tables has counts for various fruits that the stands stock. The stands stock oranges, bananas, kiwis, and apples. You need to make a web map that shows the fruit stands, and you want to quickly show the distribution of fruits at each stand. To do this, you want to make a bar chart. You can do this with Arcade!
 
-Arcade doesn't include built-in charting tools, but you can create attractive horizontal bar charts using nothing more than Arcade and HTML.
-
-By the end of this tutorial, you'll know how to create charts like this inside:
-
-- ArcGIS Online pop-ups
-- ArcGIS Dashboards
-- Dashboard Lists
-- Dashboard Tables
-
-> **Insert screenshot of the finished chart here.**
-
-You'll also understand how to customize the charts for your own layers.
-
----
-
-# Before You Begin
-
-This tutorial assumes you:
-
-- Know the basics of Arcade expressions
-- Have a layer with several numeric fields
-- Know how to create an Arcade expression in a popup or Dashboard
-
-If you've never written Arcade before, don't worry—we'll explain each new concept as we use it.
+[image goes here]
 
 ---
 
 # Step 1: Think About the Data
 
-Suppose you manage a layer showing fruit stands.
+Suppose you manage a layer showing fruit stands. Here is a sample of what the attribute table look like:
 
-Each feature stores the number of:
-
-| Apples | Bananas | Kiwis | Oranges |
-| ------- | -------- | ------ | -------- |
-| 15 | 22 | 8 | 30 |
+| Site Name | Apples | Bananas | Kiwis | Oranges |
+| ------- | -------- | ------ | -------- |-------- |
+| City Hall Farmer's Market | 15 | 22 | 8 | 30 |
+| Ferry Building Farmer's Market | 10 | 2 | 3 | 9 |
 
 Instead of displaying four numbers, we'd like to show one graphic that immediately communicates the distribution.
 
-> **Insert the finished bar chart here.**
-
 ---
+
+# Step 2: Think about the Function You Would Like to Write
+
+Here is what you know:
+* You want your chart to appear in a web map pop up, so you are working in the pop up Arcade profile.
+* You have counts of fruits
+
+You need to write a function 
 
 # Step 2: Store the Values in Arrays
 
